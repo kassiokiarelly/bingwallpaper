@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "BingWallpaper": {
+      "commandName": "Project",
+      "commandLineArgs": "-o C:\\temp"
+    }
+  }
+}
