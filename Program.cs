@@ -1,5 +1,7 @@
 ﻿using BingWallpaper.Downloader;
 using System;
+using BingWallpaper.SystemInterop;
+using CommandLine;
 
 namespace BingWallpaper
 {
@@ -7,34 +9,16 @@ namespace BingWallpaper
     {
         static void Main(string[] args)
         {
-            var parser = new CommandLineParser.CommandLineParser();
-            var appArguments = new AppArguments();
-            parser.ShowUsageHeader = "Here is how you use the app: ";
-            parser.ShowUsageFooter = "Have fun!";
-            parser.ExtractArgumentAttributes(appArguments);
-            parser.ParseCommandLine(args);
-
-            if (appArguments.Help)
-            {
-                parser.ShowUsage();
-            }
-            else if (appArguments.Version)
-            {
-                ShowVersion();
-            }
-            else
-            {
-                var bingDownloader = new BingDownloader();
-                var app = new WallpaperDownloader(appArguments, bingDownloader);
-                app.Start();
-            }
-
+            Parser.Default.ParseArguments<AppArguments>(args)
+                .WithParsed(Run);
         }
 
-        private static void ShowVersion()
+        private static void Run(AppArguments appArguments)
         {
-            var version = typeof(Program).Assembly.GetName().Version;
-            Console.WriteLine(version);
+            var bingDownloader = new BingDownloader();
+            var systemInterop = new WindowsInterop();
+            var app = new Application(appArguments, bingDownloader, systemInterop);
+            app.Start();
         }
     }
 }

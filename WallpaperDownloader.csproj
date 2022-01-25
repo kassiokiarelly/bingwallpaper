@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <StartupObject>BingWallpaper.Program</StartupObject>
+    <ApplicationIcon />
+    <RootNamespace>BingWallpaper</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.8.0" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.40" />
+  </ItemGroup>
+
+</Project>
